@@ -6,6 +6,7 @@ import resObj from "../utils/mockdata";
 import Shimmer from "./Shimmer";
 import { RES_ALL_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // Local State Variable
@@ -21,10 +22,18 @@ const Body = () => {
   const fetchdata = async () => {
     const data = await fetch(RES_ALL_URL);
     const json = await data.json();
-    console.log(json.pageProps.data.vendors);
+    // console.log(json.pageProps.data.vendors);
     setListOfRestraurants(json.pageProps.data.vendors);
     setFilteredRestraurants(json.pageProps.data.vendors);
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if (!onlineStatus) {
+    return (
+      <h1>Looks Like Your offile! Please check your Internet connection</h1>
+    );
+  }
 
   return listOfRestraurants.length === 0 ? (
     <Shimmer />
@@ -43,7 +52,7 @@ const Body = () => {
           <button
             className="search-btn"
             onClick={() => {
-              console.log(searchText);
+              // console.log(searchText);
               setFilteredRestraurants(
                 listOfRestraurants.filter((res) =>
                   res.name.toLowerCase().includes(searchText.toLowerCase()),
