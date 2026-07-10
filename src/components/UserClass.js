@@ -11,29 +11,29 @@ class UserClass extends React.Component {
         avatar_url: "dummyphoto",
       },
     };
-    console.log(this.props.name + "Child constructor");
+    // console.log(this.props.name + "Child constructor");
   }
   async componentDidMount() {
-    console.log(this.props.name + "child compnentDidMount");
+    // console.log(this.props.name + "child compnentDidMount");
     const data = await fetch("https://api.github.com/users/maheshkp92");
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
     this.setState({
       userInfo: json,
     });
-    this.timer = setInterval(() => {
-      console.log("print ebery 1 sec....");
-    }, 1000);
+    // this.timer = setInterval(() => {
+    //   console.log("print ebery 1 sec....");
+    // }, 1000);
   }
   componentDidUpdate() {
-    console.log("componentDidUpdate");
+    // console.log("componentDidUpdate");
   }
   componentWillUnmount() {
-    console.log("componentWillUnmount");
+    // console.log("componentWillUnmount");
     clearInterval(this.timer);
   }
   render() {
-    console.log(this.props.name + "Child render");
+    // console.log(this.props.name + "Child render");
     const { name, location, avatar_url } = this.state.userInfo;
     return (
       <div className="user-card">
